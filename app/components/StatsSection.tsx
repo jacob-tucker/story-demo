@@ -23,7 +23,7 @@ export function StatsSection({
 
   // Animate stats counting up
   useEffect(() => {
-    if (demoState === "earning" || demoState === "selling") {
+    if (demoState === "earning") {
       setIsAnimating(true);
 
       const duration = 2000; // 2 seconds
@@ -48,7 +48,7 @@ export function StatsSection({
         } else {
           setAnimatedStats(statsData);
           clearInterval(interval);
-          setTimeout(() => setIsAnimating(false), 1000);
+          setIsAnimating(false);
         }
       }, duration / steps);
 
@@ -60,9 +60,6 @@ export function StatsSection({
     ) {
       setAnimatedStats(statsData);
       setIsAnimating(false);
-    } else if (demoState === "protecting" || demoState === "protected") {
-      // During protection states, keep current stats (don't reset)
-      setIsAnimating(false);
     } else if (demoState === "initial") {
       // Reset everything when demo is restarted
       setAnimatedStats({
@@ -73,17 +70,20 @@ export function StatsSection({
       });
       setIsAnimating(false);
     }
-  }, [demoState, statsData]);
+    // During protection states, keep current stats (don't reset)
+  }, [
+    demoState,
+    statsData.views,
+    statsData.licenses,
+    statsData.remixes,
+    statsData.earnings,
+  ]);
 
+  // Only show stats during active demo states
   if (
-    !(
-      demoState === "using" ||
-      demoState === "selling" ||
-      demoState === "earning" ||
-      demoState === "claiming" ||
-      demoState === "claimed" ||
-      demoState === "completed"
-    )
+    demoState === "initial" ||
+    demoState === "protecting" ||
+    demoState === "protected"
   ) {
     return null;
   }
@@ -134,12 +134,10 @@ export function StatsSection({
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-semibold">Stats</h3>
           <div className="text-xs text-gray-500">
-            {demoState === "using" && "Live Analytics"}
-            {demoState === "selling" && "Growing Metrics"}
             {demoState === "earning" && "Performance Data"}
             {demoState === "claiming" && "Total Overview"}
-            {demoState === "claimed" && "Final Statistics"}
-            {demoState === "completed" && "Final Statistics"}
+            {(demoState === "claimed" || demoState === "completed") &&
+              "Final Statistics"}
           </div>
         </div>
 
