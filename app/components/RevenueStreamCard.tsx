@@ -376,11 +376,8 @@ export function RevenueStreamCard({
                 )}
 
                 {example.id === "ai-training" && (
-                  <div className="w-32">
-                    <div className="text-xs text-gray-500 mb-2 text-center">
-                      AI Processing Your IP
-                    </div>
-                    <div className="flex items-center justify-center">
+                  <div className="w-32 h-32">
+                    <div className="flex items-center justify-center h-full">
                       {/* Brain container with pulsing effect */}
                       <div className="relative w-16 h-16 rounded-full border-2 border-purple-300 bg-purple-100 dark:bg-purple-900/30 dark:border-purple-700 flex items-center justify-center animate-pulse">
                         {/* Brain icon */}
