@@ -61,20 +61,19 @@ export function StatsSection({
       setAnimatedStats(statsData);
       setIsAnimating(false);
     } else if (demoState === "protecting" || demoState === "protected") {
-      // During protection states, keep current stats or show zeros if none set
-      // Don't reset if we already have stats from a previous animation
-      if (animatedStats.views === 0 && animatedStats.licenses === 0) {
-        setAnimatedStats({
-          views: 0,
-          licenses: 0,
-          remixes: 0,
-          earnings: 0,
-        });
-      }
+      // During protection states, keep current stats (don't reset)
+      setIsAnimating(false);
+    } else if (demoState === "initial") {
+      // Reset everything when demo is restarted
+      setAnimatedStats({
+        views: 0,
+        licenses: 0,
+        remixes: 0,
+        earnings: 0,
+      });
       setIsAnimating(false);
     }
-    // Remove the else clause that was resetting stats to zero
-  }, [demoState, statsData, animatedStats]);
+  }, [demoState, statsData]);
 
   if (
     !(
