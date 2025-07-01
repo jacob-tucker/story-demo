@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Icon } from "./Icon";
 
 interface RoyaltyStepProps {
   isActive: boolean;

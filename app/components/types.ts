@@ -23,11 +23,6 @@ export type DemoState =
   | "claiming"
   | "claimed";
 
-interface LicenseTerm {
-  term: string;
-  description: string;
-}
-
 export interface UsageExample {
   id: string;
   title: string;

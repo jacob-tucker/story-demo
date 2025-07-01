@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { LicenseOption } from "./types";
 import { licenseOptions } from "./LicenseOptions";
 import { Icon } from "./Icon";
 
@@ -20,7 +19,6 @@ export function LicenseStep({
   isCompleted,
   selectedLicense,
   customRevShare,
-  demoState,
   onSelectLicense,
   onCustomRevShareChange,
   onProtect,
@@ -148,8 +146,8 @@ export function LicenseStep({
                   </span>
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  Set the percentage of revenue you'll earn when others use your
-                  IP commercially
+                  Set the percentage of revenue you&apos;ll earn when others use
+                  your IP commercially
                 </p>
               </div>
             )}

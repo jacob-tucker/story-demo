@@ -47,7 +47,7 @@ export function StepsModal({
       {/* Header */}
       <div className="px-4 py-3 border-b border-black/5 dark:border-white/5 flex-shrink-0">
         <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-          Welcome to Story's Demo
+          Welcome to Story&apos;s Demo
         </h2>
       </div>
 
@@ -57,9 +57,9 @@ export function StepsModal({
         <div className="mb-6">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
             This demo walks you through registering your intellectual property
-            on Story Protocol. You'll upload your work, set license terms, and
-            see how you can earn royalties when others use your IP commercially.
-            The entire process takes just a few steps.
+            on Story Protocol. You&apos;ll upload your work, set license terms,
+            and see how you can earn royalties when others use your IP
+            commercially. The entire process takes just a few steps.
           </p>
         </div>
 

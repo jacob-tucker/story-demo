@@ -12,7 +12,6 @@ export function UploadStep({
   isActive,
   isCompleted,
   onUpload,
-  onImageUpload,
 }: UploadStepProps) {
   const [isDragging, setIsDragging] = useState(false);
 

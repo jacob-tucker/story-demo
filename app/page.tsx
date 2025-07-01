@@ -6,7 +6,6 @@ import { IPPreviewSection } from "./components/IPPreviewSection";
 import { RevenueStreamsSection } from "./components/RevenueStreamsSection";
 import { RemixStreamsSection } from "./components/RemixStreamsSection";
 import { StatsSection } from "./components/StatsSection";
-import { SummaryStats } from "./components/SummaryStats";
 import {
   UsageExample,
   DemoState,
@@ -22,7 +21,6 @@ export default function Home() {
   const [selectedLicense, setSelectedLicense] = useState<string | null>(null);
   const [customRevShare, setCustomRevShare] = useState<number>(15);
   const [demoState, setDemoState] = useState<DemoState>("initial");
-  const [activeUsages, setActiveUsages] = useState<UsageExample[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [remixColors] = useState(["#FF0000", "#00FF00", "#0000FF", "#FFFF00"]);
   const [selectedExample, setSelectedExample] = useState<UsageExample | null>(
@@ -77,13 +75,9 @@ export default function Home() {
 
         // Show revenue streams and start earning immediately
         setDemoState("earning");
-        for (const example of usageExamples) {
-          setActiveUsages((prev) => [...prev, example]);
-          await new Promise((resolve) => setTimeout(resolve, 800));
-        }
 
         // Brief pause then show claim prompt
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         setDemoState("claiming");
       };
 
@@ -114,7 +108,6 @@ export default function Home() {
     setUploadedImage(null);
     setSelectedLicense(null);
     setCustomRevShare(15);
-    setActiveUsages([]);
   };
 
   return (
@@ -182,12 +175,6 @@ export default function Home() {
                   onSelectExample={setSelectedRemixExample}
                 />
               )}
-
-              <SummaryStats
-                demoState={demoState}
-                demoRevenue={totalRevenue}
-                demoRoyalties={totalRoyalties}
-              />
             </div>
           </div>
         </div>
