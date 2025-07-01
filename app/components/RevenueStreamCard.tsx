@@ -126,7 +126,7 @@ export function RevenueStreamCard({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div
-              className="p-2 rounded-lg"
+              className="p-2 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: `${example.color}15` }}
             >
               <Icon
@@ -374,6 +374,41 @@ export function RevenueStreamCard({
                     </div>
                   </div>
                 )}
+
+                {example.id === "ai-training" && (
+                  <div className="w-32">
+                    <div className="text-xs text-gray-500 mb-2 text-center">
+                      AI Processing Your IP
+                    </div>
+                    <div className="flex items-center justify-center">
+                      {/* Brain container with pulsing effect */}
+                      <div className="relative w-16 h-16 rounded-full border-2 border-purple-300 bg-purple-100 dark:bg-purple-900/30 dark:border-purple-700 flex items-center justify-center animate-pulse">
+                        {/* Brain icon */}
+                        <i className="fas fa-brain text-purple-600 dark:text-purple-400 text-lg"></i>
+
+                        {/* Your IP image inside the brain */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full overflow-hidden border border-white/50 shadow-sm">
+                            <Image
+                              src={uploadedImage}
+                              alt="Your IP"
+                              width={32}
+                              height={32}
+                              className="object-contain w-full h-full opacity-80"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Pulsing rings around the brain */}
+                        <div className="absolute inset-0 rounded-full border border-purple-400 opacity-30 animate-ping"></div>
+                        <div
+                          className="absolute inset-0 rounded-full border border-purple-500 opacity-20 animate-ping"
+                          style={{ animationDelay: "0.5s" }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -435,6 +470,24 @@ export function RevenueStreamCard({
                         <span className="text-gray-600 dark:text-gray-400">
                           Attribution:{" "}
                           <span className="font-medium">Required</span>
+                        </span>
+                      </div>
+                    </>
+                  )}
+                  {example.id === "ai-training" && (
+                    <>
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        <span className="text-gray-600 dark:text-gray-400">
+                          AI Training:{" "}
+                          <span className="font-medium">Permitted</span>
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        <span className="text-gray-600 dark:text-gray-400">
+                          Data Usage:{" "}
+                          <span className="font-medium">Commercial</span>
                         </span>
                       </div>
                     </>
