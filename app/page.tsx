@@ -70,14 +70,23 @@ export default function Home() {
         // Show revenue streams and start earning immediately
         setDemoState("earning");
 
-        // Brief pause then show claim prompt
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        setDemoState("claiming");
+        // For non-commercial licenses, skip to completed state after earning
+        if (
+          selectedLicense === "open-use" ||
+          selectedLicense === "non-commercial"
+        ) {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          setDemoState("completed");
+        } else {
+          // For commercial licenses, show claim prompt after earning
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+          setDemoState("claiming");
+        }
       };
 
       runDemo();
     }
-  }, [activeStep]);
+  }, [activeStep, selectedLicense]);
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();

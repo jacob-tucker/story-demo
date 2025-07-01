@@ -21,7 +21,8 @@ export type DemoState =
   | "selling"
   | "earning"
   | "claiming"
-  | "claimed";
+  | "claimed"
+  | "completed";
 
 export interface UsageExample {
   id: string;

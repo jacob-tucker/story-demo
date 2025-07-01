@@ -37,7 +37,7 @@ export function StepsModal({
   // Determine completion states
   const step1Completed = activeStep > 1;
   const step2Completed = activeStep > 2;
-  const step3Completed = demoState === "claimed"; // Only completed after claiming
+  const step3Completed = demoState === "claimed" || demoState === "completed"; // Completed after claiming OR for non-commercial licenses
 
   return (
     <div
@@ -85,13 +85,25 @@ export function StepsModal({
           <RoyaltyStep
             isActive={activeStep === 3}
             isCompleted={step3Completed}
+            selectedLicense={selectedLicense}
             demoState={demoState}
             demoRevenue={demoRevenue}
             demoRoyalties={demoRoyalties}
             onClaim={onClaim}
-            onReset={onReset}
           />
         </div>
+
+        {/* Reset Demo Button - shown when demo is completed */}
+        {step3Completed && onReset && (
+          <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5">
+            <button
+              onClick={onReset}
+              className="w-full py-3 px-4 rounded-lg text-sm font-medium bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
+            >
+              Reset Demo
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

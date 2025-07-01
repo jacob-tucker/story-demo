@@ -23,7 +23,9 @@ export function RevenueStreamsSection({
       demoState === "using" ||
       demoState === "selling" ||
       demoState === "earning" ||
-      demoState === "claiming"
+      demoState === "claiming" ||
+      demoState === "claimed" ||
+      demoState === "completed"
     )
   ) {
     return null;
@@ -39,6 +41,8 @@ export function RevenueStreamsSection({
             {demoState === "selling" && "Generating Sales"}
             {demoState === "earning" && "Earning Revenue"}
             {demoState === "claiming" && "Ready to Claim"}
+            {demoState === "claimed" && "Revenue Claimed"}
+            {demoState === "completed" && "Usage Analytics"}
           </div>
         </div>
 

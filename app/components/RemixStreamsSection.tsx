@@ -21,7 +21,9 @@ export function RemixStreamsSection({
       demoState === "using" ||
       demoState === "selling" ||
       demoState === "earning" ||
-      demoState === "claiming"
+      demoState === "claiming" ||
+      demoState === "claimed" ||
+      demoState === "completed"
     )
   ) {
     return null;
@@ -37,6 +39,8 @@ export function RemixStreamsSection({
             {demoState === "selling" && "Creating Remixes"}
             {demoState === "earning" && "Remix Activity"}
             {demoState === "claiming" && "Remix Analytics"}
+            {demoState === "claimed" && "Community Remixes"}
+            {demoState === "completed" && "Community Remixes"}
           </div>
         </div>
 

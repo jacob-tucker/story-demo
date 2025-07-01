@@ -57,8 +57,12 @@ export function RevenueStreamCard({
       }, duration / steps);
 
       return () => clearInterval(interval);
-    } else if (demoState === "claiming") {
-      // Show final amounts when claiming
+    } else if (
+      demoState === "claiming" ||
+      demoState === "claimed" ||
+      demoState === "completed"
+    ) {
+      // Show final amounts when claiming or after completion
       setCurrentRevenue(example.revenue);
       setCurrentRoyalty(royaltyAmount);
       setIsAnimating(false);

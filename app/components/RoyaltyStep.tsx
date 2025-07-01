@@ -3,6 +3,7 @@ import { useState } from "react";
 interface RoyaltyStepProps {
   isActive: boolean;
   isCompleted: boolean;
+  selectedLicense: string | null;
   demoState: string;
   demoRevenue: number;
   demoRoyalties: number;
@@ -13,6 +14,7 @@ interface RoyaltyStepProps {
 export function RoyaltyStep({
   isActive,
   isCompleted,
+  selectedLicense,
   demoState,
   demoRevenue,
   demoRoyalties,
@@ -21,8 +23,18 @@ export function RoyaltyStep({
 }: RoyaltyStepProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Check if this is a commercial license that can earn royalties
+  const isCommercialLicense =
+    selectedLicense === "commercial" || selectedLicense === "commercial-remix";
+
   const showStats =
     isActive && (demoState === "earning" || demoState === "claiming");
+
+  // For non-commercial licenses, show completion state when earning starts
+  const showCompletionForNonCommercial =
+    !isCommercialLicense &&
+    isActive &&
+    (demoState === "earning" || demoState === "completed");
 
   const handleClaim = async () => {
     setIsAnimating(true);
@@ -93,7 +105,8 @@ export function RoyaltyStep({
         <span className="text-sm font-medium">Claim Royalties</span>
       </div>
 
-      {showStats && (
+      {/* For commercial licenses with royalties */}
+      {isCommercialLicense && showStats && (
         <div className="space-y-3 mt-3">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
             <div className="flex items-center justify-between mb-1">
@@ -130,14 +143,22 @@ export function RoyaltyStep({
         </div>
       )}
 
-      {isCompleted && onReset && (
-        <div className="mt-3">
-          <button
-            onClick={onReset}
-            className="w-full py-2 px-3 rounded-lg text-xs font-medium bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
-          >
-            Try Again
-          </button>
+      {/* For non-commercial licenses */}
+      {!isCommercialLicense && showCompletionForNonCommercial && (
+        <div className="space-y-3 mt-3">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
+            <div className="text-center">
+              <div className="text-sm font-medium text-blue-600 mb-1">
+                No Royalties Available
+              </div>
+              <div className="text-xs text-gray-500">
+                You have no royalties to claim because this is a{" "}
+                {selectedLicense === "open-use" ? "Open Use" : "Non-Commercial"}{" "}
+                license. Your IP is protected and others can use it under the
+                terms you've set.
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

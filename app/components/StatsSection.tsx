@@ -1,5 +1,5 @@
 import { StatsData, DemoState } from "./types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Icon } from "./Icon";
 
 interface StatsSectionProps {
@@ -20,6 +20,7 @@ export function StatsSection({
     earnings: 0,
   });
   const [isAnimating, setIsAnimating] = useState(false);
+  const hasSetFinalStats = useRef(false);
 
   // Animate stats counting up
   useEffect(() => {
@@ -53,18 +54,27 @@ export function StatsSection({
       }, duration / steps);
 
       return () => clearInterval(interval);
-    } else if (demoState === "claiming") {
+    } else if (
+      demoState === "claiming" ||
+      demoState === "claimed" ||
+      demoState === "completed"
+    ) {
       setAnimatedStats(statsData);
       setIsAnimating(false);
-    } else {
-      setAnimatedStats({
-        views: 0,
-        licenses: 0,
-        remixes: 0,
-        earnings: 0,
-      });
+    } else if (demoState === "protecting" || demoState === "protected") {
+      // During protection states, keep current stats or show zeros if none set
+      // Don't reset if we already have stats from a previous animation
+      if (animatedStats.views === 0 && animatedStats.licenses === 0) {
+        setAnimatedStats({
+          views: 0,
+          licenses: 0,
+          remixes: 0,
+          earnings: 0,
+        });
+      }
       setIsAnimating(false);
     }
+    // Remove the else clause that was resetting stats to zero
   }, [demoState, statsData]);
 
   if (
@@ -72,7 +82,9 @@ export function StatsSection({
       demoState === "using" ||
       demoState === "selling" ||
       demoState === "earning" ||
-      demoState === "claiming"
+      demoState === "claiming" ||
+      demoState === "claimed" ||
+      demoState === "completed"
     )
   ) {
     return null;
@@ -128,6 +140,8 @@ export function StatsSection({
             {demoState === "selling" && "Growing Metrics"}
             {demoState === "earning" && "Performance Data"}
             {demoState === "claiming" && "Total Overview"}
+            {demoState === "claimed" && "Final Statistics"}
+            {demoState === "completed" && "Final Statistics"}
           </div>
         </div>
 
