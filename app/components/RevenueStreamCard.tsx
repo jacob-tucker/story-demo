@@ -9,6 +9,7 @@ interface RevenueStreamCardProps {
   uploadedImage: string | null;
   onClick: () => void;
   demoState?: DemoState;
+  royaltyRate: number;
 }
 
 export function RevenueStreamCard({
@@ -17,9 +18,8 @@ export function RevenueStreamCard({
   uploadedImage,
   onClick,
   demoState,
+  royaltyRate,
 }: RevenueStreamCardProps) {
-  // Same royalty rate for all since they use the same license terms
-  const royaltyRate = 0.15; // 15% for all revenue streams
   const royaltyAmount = Math.floor(example.revenue * royaltyRate);
 
   // Animation state
@@ -379,9 +379,9 @@ export function RevenueStreamCard({
                   <div className="w-32 h-32">
                     <div className="flex items-center justify-center h-full">
                       {/* Brain container with pulsing effect */}
-                      <div className="relative w-16 h-16 rounded-full border-2 border-purple-300 bg-purple-100 dark:bg-purple-900/30 dark:border-purple-700 flex items-center justify-center animate-pulse">
+                      <div className="relative w-16 h-16 rounded-full border-2 border-blue-300 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 flex items-center justify-center animate-pulse">
                         {/* Brain icon */}
-                        <i className="fas fa-brain text-purple-600 dark:text-purple-400 text-lg"></i>
+                        <i className="fas fa-brain text-blue-600 dark:text-blue-400 text-lg"></i>
 
                         {/* Your IP image inside the brain */}
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -397,9 +397,9 @@ export function RevenueStreamCard({
                         </div>
 
                         {/* Pulsing rings around the brain */}
-                        <div className="absolute inset-0 rounded-full border border-purple-400 opacity-30 animate-ping"></div>
+                        <div className="absolute inset-0 rounded-full border border-blue-400 opacity-30 animate-ping"></div>
                         <div
-                          className="absolute inset-0 rounded-full border border-purple-500 opacity-20 animate-ping"
+                          className="absolute inset-0 rounded-full border border-blue-500 opacity-20 animate-ping"
                           style={{ animationDelay: "0.5s" }}
                         ></div>
                       </div>

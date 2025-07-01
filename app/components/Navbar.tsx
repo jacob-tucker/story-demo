@@ -58,9 +58,9 @@ export default function Navbar() {
               href="https://portal.story.foundation"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 dark:from-blue-500 dark:to-purple-500 dark:hover:from-blue-600 dark:hover:to-purple-600 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 overflow-hidden"
+              className="group relative px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 hover:from-blue-600 hover:via-blue-700 hover:to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 dark:hover:from-blue-500 dark:hover:via-blue-600 dark:hover:to-cyan-500 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               <span className="relative flex items-center space-x-1.5">
                 <svg
                   className="w-3.5 h-3.5"

@@ -137,7 +137,7 @@ export function RoyaltyStep({
             onClick={onReset}
             className="w-full py-2 px-3 rounded-lg text-xs font-medium bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
           >
-            Try Again ✨
+            Try Again
           </button>
         </div>
       )}

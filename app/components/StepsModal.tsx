@@ -6,12 +6,14 @@ import { DemoState } from "./types";
 interface StepsModalProps {
   activeStep: number;
   selectedLicense: string | null;
+  customRevShare: number;
   demoState: DemoState;
   demoRevenue: number;
   demoRoyalties: number;
   onUpload: (file: File) => void;
   onImageUpload: (image: string | null) => void;
   onSelectLicense: (license: string | null) => void;
+  onCustomRevShareChange: (revShare: number) => void;
   onProtect: () => void;
   onClaim: () => void;
   onReset?: () => void;
@@ -20,12 +22,14 @@ interface StepsModalProps {
 export function StepsModal({
   activeStep,
   selectedLicense,
+  customRevShare,
   demoState,
   demoRevenue,
   demoRoyalties,
   onUpload,
   onImageUpload,
   onSelectLicense,
+  onCustomRevShareChange,
   onProtect,
   onClaim,
   onReset,
@@ -36,16 +40,19 @@ export function StepsModal({
   const step3Completed = demoState === "claimed"; // Only completed after claiming
 
   return (
-    <div className="sticky top-8 w-full max-w-[400px] bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-black/5 dark:border-white/5 overflow-hidden">
+    <div
+      className="sticky top-8 w-full max-w-[400px] bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-black/5 dark:border-white/5 overflow-hidden flex flex-col"
+      style={{ maxHeight: "calc(100vh - 8rem)" }}
+    >
       {/* Header */}
-      <div className="px-4 py-3 border-b border-black/5 dark:border-white/5">
+      <div className="px-4 py-3 border-b border-black/5 dark:border-white/5 flex-shrink-0">
         <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
           Welcome to Story's Demo
         </h2>
       </div>
 
       {/* Main Content */}
-      <div className="p-4">
+      <div className="p-4 overflow-y-auto flex-1">
         {/* Introduction */}
         <div className="mb-6">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -68,8 +75,10 @@ export function StepsModal({
             isActive={activeStep === 2}
             isCompleted={step2Completed}
             selectedLicense={selectedLicense}
+            customRevShare={customRevShare}
             demoState={demoState}
             onSelectLicense={onSelectLicense}
+            onCustomRevShareChange={onCustomRevShareChange}
             onProtect={onProtect}
             onLicenseSelect={onSelectLicense}
           />

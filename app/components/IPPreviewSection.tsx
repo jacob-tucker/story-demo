@@ -7,12 +7,14 @@ interface IPPreviewSectionProps {
   uploadedImage: string | null;
   demoState: DemoState;
   selectedLicense: string | null;
+  customRevShare?: number;
 }
 
 export function IPPreviewSection({
   uploadedImage,
   demoState,
   selectedLicense,
+  customRevShare,
 }: IPPreviewSectionProps) {
   const selectedLicenseOption = selectedLicense
     ? licenseOptions.find((option) => option.id === selectedLicense)
@@ -147,12 +149,26 @@ export function IPPreviewSection({
               {selectedLicenseOption.description}
             </p>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                Revenue Share
-              </span>
-              <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                {selectedLicenseOption.revShare}%
-              </span>
+              {selectedLicense === "open-use" ||
+              selectedLicense === "non-commercial" ? (
+                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                  Commercial Use: Disabled
+                </span>
+              ) : (
+                <>
+                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    Revenue Share
+                  </span>
+                  <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                    {(selectedLicense === "commercial" ||
+                      selectedLicense === "commercial-remix") &&
+                    customRevShare
+                      ? customRevShare
+                      : selectedLicenseOption.revShare}
+                    %
+                  </span>
+                </>
+              )}
             </div>
           </div>
         )}

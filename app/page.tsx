@@ -4,27 +4,64 @@ import { useState, useEffect } from "react";
 import { StepsModal } from "./components/StepsModal";
 import { IPPreviewSection } from "./components/IPPreviewSection";
 import { RevenueStreamsSection } from "./components/RevenueStreamsSection";
+import { RemixStreamsSection } from "./components/RemixStreamsSection";
+import { StatsSection } from "./components/StatsSection";
 import { SummaryStats } from "./components/SummaryStats";
-import { UsageExample, DemoState } from "./components/types";
+import {
+  UsageExample,
+  DemoState,
+  RemixStream,
+  StatsData,
+} from "./components/types";
 import { usageExamples } from "./components/usageExamples";
+import { remixExamples } from "./components/remixExamples";
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState(1);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedLicense, setSelectedLicense] = useState<string | null>(null);
+  const [customRevShare, setCustomRevShare] = useState<number>(15);
   const [demoState, setDemoState] = useState<DemoState>("initial");
   const [activeUsages, setActiveUsages] = useState<UsageExample[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [remixColors] = useState(["#FF0000", "#00FF00", "#0000FF", "#FFFF00"]);
   const [selectedExample, setSelectedExample] = useState<UsageExample | null>(
     usageExamples.find((example) => example.id === "merchandise") || null
   );
+  const [selectedRemixExample, setSelectedRemixExample] =
+    useState<RemixStream | null>(
+      remixExamples.find((example) => example.id === "memes") || null
+    );
 
   // Calculate totals from usage examples
   const totalRevenue = usageExamples.reduce(
     (sum, example) => sum + example.revenue,
     0
   );
-  const totalRoyalties = Math.floor(totalRevenue * 0.15); // 15% royalty rate
+
+  // Use custom revenue share for commercial licenses, otherwise use default
+  const isCommercialLicense =
+    selectedLicense === "commercial" || selectedLicense === "commercial-remix";
+  const royaltyRate = isCommercialLicense ? customRevShare / 100 : 0.15;
+  const totalRoyalties = Math.floor(totalRevenue * royaltyRate);
+
+  // Calculate stats data
+  const totalRemixes = remixExamples.reduce(
+    (sum, example) => sum + example.count,
+    0
+  );
+  const statsData: StatsData = {
+    views: 12847,
+    licenses: 342,
+    remixes: totalRemixes,
+    earnings: totalRoyalties,
+  };
+
+  // Determine which sections to show based on license type
+  const showRevenueStreams =
+    selectedLicense === "commercial" || selectedLicense === "commercial-remix";
+  const showRemixStreams = selectedLicense !== null; // All license types show remix streams
+  const showStats = selectedLicense !== null;
 
   // Handle the automated demo flow
   useEffect(() => {
@@ -76,44 +113,75 @@ export default function Home() {
     setActiveStep(1);
     setUploadedImage(null);
     setSelectedLicense(null);
+    setCustomRevShare(15);
     setActiveUsages([]);
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-8">
-      <div className="max-w-7xl mx-auto flex items-start gap-8 lg:gap-12 relative">
+    <div
+      className="bg-background overflow-hidden"
+      style={{ height: "calc(100vh - 4rem)" }}
+    >
+      <div className="max-w-7xl mx-auto flex items-start gap-4 sm:gap-8 lg:gap-12 relative h-full px-4 sm:px-8 py-4 sm:py-8 box-border">
         {/* Left Side - Journey Modal */}
         <StepsModal
           activeStep={activeStep}
           selectedLicense={selectedLicense}
+          customRevShare={customRevShare}
           demoState={demoState}
           demoRevenue={totalRevenue}
           demoRoyalties={totalRoyalties}
           onUpload={handleFileUpload}
           onImageUpload={setUploadedImage}
           onSelectLicense={setSelectedLicense}
+          onCustomRevShareChange={setCustomRevShare}
           onProtect={handleProtect}
           onClaim={handleClaim}
           onReset={handleReset}
         />
 
         {/* Right Side - Dynamic Preview */}
-        <div className="flex-1 min-h-[600px]">
-          <div className="max-w-[600px] mx-auto">
+        <div
+          className="flex-1 overflow-y-auto"
+          style={{ height: "calc(100vh - 6rem)" }}
+        >
+          <div className="max-w-[600px] mx-auto pb-8">
             <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
               <IPPreviewSection
                 uploadedImage={uploadedImage}
                 demoState={demoState}
                 selectedLicense={selectedLicense}
+                customRevShare={customRevShare}
               />
 
-              <RevenueStreamsSection
-                demoState={demoState}
-                usageExamples={usageExamples}
-                selectedExample={selectedExample}
-                uploadedImage={uploadedImage}
-                onSelectExample={setSelectedExample}
-              />
+              {showStats && (
+                <StatsSection
+                  demoState={demoState}
+                  statsData={statsData}
+                  selectedLicense={selectedLicense}
+                />
+              )}
+
+              {showRevenueStreams && (
+                <RevenueStreamsSection
+                  demoState={demoState}
+                  usageExamples={usageExamples}
+                  selectedExample={selectedExample}
+                  uploadedImage={uploadedImage}
+                  royaltyRate={royaltyRate}
+                  onSelectExample={setSelectedExample}
+                />
+              )}
+
+              {showRemixStreams && (
+                <RemixStreamsSection
+                  demoState={demoState}
+                  remixExamples={remixExamples}
+                  selectedExample={selectedRemixExample}
+                  uploadedImage={uploadedImage}
+                  onSelectExample={setSelectedRemixExample}
+                />
+              )}
 
               <SummaryStats
                 demoState={demoState}

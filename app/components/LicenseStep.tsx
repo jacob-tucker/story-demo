@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { LicenseOption } from "./types";
 import { licenseOptions } from "./LicenseOptions";
 import { Icon } from "./Icon";
@@ -6,8 +7,10 @@ interface LicenseStepProps {
   isActive: boolean;
   isCompleted: boolean;
   selectedLicense: string | null;
+  customRevShare: number;
   demoState: string;
   onSelectLicense: (licenseId: string) => void;
+  onCustomRevShareChange: (revShare: number) => void;
   onProtect: () => void;
   onLicenseSelect: (license: string) => void;
 }
@@ -16,16 +19,24 @@ export function LicenseStep({
   isActive,
   isCompleted,
   selectedLicense,
+  customRevShare,
   demoState,
   onSelectLicense,
+  onCustomRevShareChange,
   onProtect,
 }: LicenseStepProps) {
+  const [inputValue, setInputValue] = useState(customRevShare.toString());
+
+  // Sync input value when customRevShare changes from parent
+  useEffect(() => {
+    setInputValue(customRevShare.toString());
+  }, [customRevShare]);
   const getIconBackground = (optionId: string) => {
     switch (optionId) {
       case "open-use":
         return "bg-gradient-to-br from-indigo-400 to-indigo-600";
       case "non-commercial":
-        return "bg-gradient-to-br from-purple-400 to-purple-600";
+        return "bg-gradient-to-br from-blue-400 to-blue-600";
       case "commercial":
         return "bg-gradient-to-br from-emerald-400 to-emerald-600";
       case "commercial-remix":
@@ -91,6 +102,57 @@ export function LicenseStep({
               <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
             </button>
           ))}
+
+          {selectedLicense &&
+            (selectedLicense === "commercial" ||
+              selectedLicense === "commercial-remix") && (
+              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Revenue Share Percentage
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={inputValue}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setInputValue(value);
+
+                      // Only update parent state if value is valid
+                      if (value !== "" && value !== "0") {
+                        const numValue = Number(value);
+                        if (numValue >= 1 && numValue <= 100) {
+                          onCustomRevShareChange(numValue);
+                        }
+                      }
+                    }}
+                    onBlur={(e) => {
+                      const value = e.target.value;
+                      const numValue = Number(value);
+
+                      // Ensure minimum value of 1 on blur
+                      if (value === "" || numValue < 1) {
+                        setInputValue("1");
+                        onCustomRevShareChange(1);
+                      } else if (numValue > 100) {
+                        setInputValue("100");
+                        onCustomRevShareChange(100);
+                      }
+                    }}
+                    className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  />
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    %
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Set the percentage of revenue you'll earn when others use your
+                  IP commercially
+                </p>
+              </div>
+            )}
 
           {selectedLicense && (
             <button

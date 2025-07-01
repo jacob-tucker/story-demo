@@ -1,23 +1,21 @@
-import { RevenueStreamCard } from "./RevenueStreamCard";
-import { UsageExample, DemoState } from "./types";
+import { RemixStreamCard } from "./RemixStreamCard";
+import { RemixStream, DemoState } from "./types";
 
-interface RevenueStreamsSectionProps {
+interface RemixStreamsSectionProps {
   demoState: DemoState;
-  usageExamples: UsageExample[];
-  selectedExample: UsageExample | null;
+  remixExamples: RemixStream[];
+  selectedExample: RemixStream | null;
   uploadedImage: string | null;
-  royaltyRate: number;
-  onSelectExample: (example: UsageExample | null) => void;
+  onSelectExample: (example: RemixStream | null) => void;
 }
 
-export function RevenueStreamsSection({
+export function RemixStreamsSection({
   demoState,
-  usageExamples,
+  remixExamples,
   selectedExample,
   uploadedImage,
-  royaltyRate,
   onSelectExample,
-}: RevenueStreamsSectionProps) {
+}: RemixStreamsSectionProps) {
   if (
     !(
       demoState === "using" ||
@@ -33,24 +31,23 @@ export function RevenueStreamsSection({
     <div className="border-b border-gray-100 dark:border-gray-800">
       <div className="p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-base font-semibold">Revenue Streams</h3>
+          <h3 className="text-base font-semibold">Remix Streams</h3>
           <div className="text-xs text-gray-500">
-            {demoState === "using" && "Active Usage"}
-            {demoState === "selling" && "Generating Sales"}
-            {demoState === "earning" && "Earning Revenue"}
-            {demoState === "claiming" && "Ready to Claim"}
+            {demoState === "using" && "Active Remixing"}
+            {demoState === "selling" && "Creating Remixes"}
+            {demoState === "earning" && "Remix Activity"}
+            {demoState === "claiming" && "Remix Analytics"}
           </div>
         </div>
 
         <div className="space-y-3">
-          {usageExamples.map((example) => (
-            <RevenueStreamCard
+          {remixExamples.map((example) => (
+            <RemixStreamCard
               key={example.id}
               example={example}
               isSelected={selectedExample?.id === example.id}
               uploadedImage={uploadedImage}
               demoState={demoState}
-              royaltyRate={royaltyRate}
               onClick={() =>
                 onSelectExample(
                   selectedExample?.id === example.id ? null : example

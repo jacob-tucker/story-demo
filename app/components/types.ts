@@ -41,3 +41,24 @@ export interface UsageExample {
     url: string;
   };
 }
+
+export interface RemixStream {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  count: number;
+  volume: string;
+  color: string;
+  platform: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface StatsData {
+  views: number;
+  licenses: number;
+  remixes: number;
+  earnings: number;
+}
