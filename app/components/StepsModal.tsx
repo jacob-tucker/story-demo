@@ -54,9 +54,9 @@ export function StepsModal({
         <div className="mb-6">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
             This demo walks you through registering your intellectual property
-            on Story Protocol. You&apos;ll upload your work, set license terms,
-            and see how you can earn royalties when others use your IP
-            commercially. The entire process takes just a few steps.
+            on Story. You&apos;ll upload your work, set license terms, and see
+            how you can earn royalties when others use your IP commercially. The
+            entire process takes just a few steps.
           </p>
         </div>
 

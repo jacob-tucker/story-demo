@@ -14,14 +14,14 @@ export default function Navbar() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/story_logo_black.svg"
-                alt="Story Protocol"
+                alt="Story"
                 width={120}
                 height={32}
                 className="h-6 sm:h-8 w-auto dark:hidden"
               />
               <Image
                 src="/story_logo_white.svg"
-                alt="Story Protocol"
+                alt="Story"
                 width={120}
                 height={32}
                 className="h-6 sm:h-8 w-auto hidden dark:block"
