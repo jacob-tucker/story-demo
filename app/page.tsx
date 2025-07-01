@@ -21,21 +21,17 @@ export default function Home() {
   const [selectedLicense, setSelectedLicense] = useState<string | null>(null);
   const [customRevShare, setCustomRevShare] = useState<number>(15);
   const [demoState, setDemoState] = useState<DemoState>("initial");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [remixColors] = useState(["#FF0000", "#00FF00", "#0000FF", "#FFFF00"]);
   const [selectedExample, setSelectedExample] = useState<UsageExample | null>(
-    usageExamples.find((example) => example.id === "merchandise") || null
+    usageExamples?.find((example) => example.id === "merchandise") || null
   );
   const [selectedRemixExample, setSelectedRemixExample] =
     useState<RemixStream | null>(
-      remixExamples.find((example) => example.id === "memes") || null
+      remixExamples?.find((example) => example.id === "memes") || null
     );
 
   // Calculate totals from usage examples
-  const totalRevenue = usageExamples.reduce(
-    (sum, example) => sum + example.revenue,
-    0
-  );
+  const totalRevenue =
+    usageExamples?.reduce((sum, example) => sum + example.revenue, 0) || 0;
 
   // Use custom revenue share for commercial licenses, otherwise use default
   const isCommercialLicense =
@@ -44,10 +40,8 @@ export default function Home() {
   const totalRoyalties = Math.floor(totalRevenue * royaltyRate);
 
   // Calculate stats data
-  const totalRemixes = remixExamples.reduce(
-    (sum, example) => sum + example.count,
-    0
-  );
+  const totalRemixes =
+    remixExamples?.reduce((sum, example) => sum + example.count, 0) || 0;
   const statsData: StatsData = {
     views: 12847,
     licenses: 342,
