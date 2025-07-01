@@ -97,6 +97,13 @@ export default function Home() {
     reader.readAsDataURL(file);
   };
 
+  const handleExampleImageUpload = (image: string | null) => {
+    if (image) {
+      setUploadedImage(image);
+      setActiveStep(2);
+    }
+  };
+
   const handleProtect = () => {
     setActiveStep(3);
   };
@@ -125,7 +132,7 @@ export default function Home() {
           demoRevenue={totalRevenue}
           demoRoyalties={totalRoyalties}
           onUpload={handleFileUpload}
-          onImageUpload={setUploadedImage}
+          onImageUpload={handleExampleImageUpload}
           onSelectLicense={setSelectedLicense}
           onCustomRevShareChange={setCustomRevShare}
           onProtect={handleProtect}

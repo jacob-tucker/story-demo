@@ -12,6 +12,7 @@ export function UploadStep({
   isActive,
   isCompleted,
   onUpload,
+  onImageUpload,
 }: UploadStepProps) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -32,6 +33,10 @@ export function UploadStep({
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
+  };
+
+  const handleExampleImage = () => {
+    onImageUpload("/example-image.png");
   };
 
   return (
@@ -56,40 +61,56 @@ export function UploadStep({
       </div>
 
       {isActive && (
-        <div
-          className={`
-            mt-2 border border-dashed rounded-lg p-4 text-center cursor-pointer
-            transition-colors duration-200
-            ${
-              isDragging
-                ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10"
-                : "border-gray-200 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
-            }
-          `}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onClick={() => document.getElementById("file-upload")?.click()}
-        >
-          <input
-            type="file"
-            id="file-upload"
-            className="hidden"
-            accept="image/*"
-            onChange={(e) => e.target.files?.[0] && onUpload(e.target.files[0])}
-          />
-          <div className="flex items-center justify-center gap-1.5 mb-1">
-            <Icon
-              name="fas fa-upload"
-              className="w-4 h-4 text-gray-600 dark:text-gray-400"
+        <div className="mt-2">
+          <div
+            className={`
+              border border-dashed rounded-lg p-4 text-center cursor-pointer
+              transition-colors duration-200
+              ${
+                isDragging
+                  ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10"
+                  : "border-gray-200 dark:border-gray-700 hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
+              }
+            `}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onClick={() => document.getElementById("file-upload")?.click()}
+          >
+            <input
+              type="file"
+              id="file-upload"
+              className="hidden"
+              accept="image/*"
+              onChange={(e) =>
+                e.target.files?.[0] && onUpload(e.target.files[0])
+              }
             />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
-              Upload File
-            </span>
+            <div className="flex items-center justify-center gap-1.5 mb-1">
+              <Icon
+                name="fas fa-upload"
+                className="w-4 h-4 text-gray-600 dark:text-gray-400"
+              />
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Upload File
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Drop your file here, or click to browse
+            </p>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Drop your file here, or click to browse
-          </p>
+
+          <div className="mt-2 text-center">
+            <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">
+              ... or
+            </span>
+            <button
+              onClick={handleExampleImage}
+              className="px-2 py-0.5 text-xs text-indigo-600 dark:text-indigo-400 hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 border border-indigo-600 dark:border-indigo-400 rounded-md transition-colors duration-200"
+            >
+              use an example image
+            </button>
+          </div>
         </div>
       )}
     </div>
