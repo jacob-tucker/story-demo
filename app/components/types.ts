@@ -8,6 +8,7 @@ export interface LicenseOption {
     border: string;
     bg: string;
     text: string;
+    iconColor: string;
   };
   revShare: number;
 }
@@ -35,4 +36,8 @@ export interface UsageExample {
   revenue: number;
   volume: string;
   color: string;
+  platform?: {
+    name: string;
+    url: string;
+  };
 }

@@ -16,7 +16,7 @@ export default function Home() {
   const [activeUsages, setActiveUsages] = useState<UsageExample[]>([]);
   const [remixColors] = useState(["#FF0000", "#00FF00", "#0000FF", "#FFFF00"]);
   const [selectedExample, setSelectedExample] = useState<UsageExample | null>(
-    null
+    usageExamples.find((example) => example.id === "merchandise") || null
   );
 
   // Calculate totals from usage examples

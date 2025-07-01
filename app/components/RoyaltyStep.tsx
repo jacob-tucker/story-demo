@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Icon } from "./Icon";
 
 interface RoyaltyStepProps {
   isActive: boolean;
@@ -116,7 +117,15 @@ export function RoyaltyStep({
               onClick={handleClaim}
               disabled={isAnimating}
             >
-              {isAnimating ? "Claiming..." : "Claim Now 💰"}
+              <span className="flex items-center justify-center gap-2">
+                {isAnimating ? (
+                  "Claiming..."
+                ) : (
+                  <>
+                    <span>Claim Now</span>
+                  </>
+                )}
+              </span>
             </button>
           )}
         </div>

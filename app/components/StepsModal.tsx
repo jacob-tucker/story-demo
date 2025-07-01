@@ -38,14 +38,10 @@ export function StepsModal({
   return (
     <div className="sticky top-8 w-full max-w-[400px] bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-black/5 dark:border-white/5 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-black/5 dark:border-white/5">
-        <div className="flex items-center gap-1.5">
-          <span className="text-base">✨</span>
-          <span className="text-sm font-medium">Story Demo</span>
-        </div>
-        <div className="flex items-center gap-2 text-xs text-gray-500">
-          <span>Last updated: 30m ago</span>
-        </div>
+      <div className="px-4 py-3 border-b border-black/5 dark:border-white/5">
+        <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+          Welcome to Story's Demo
+        </h2>
       </div>
 
       {/* Main Content */}
@@ -53,9 +49,10 @@ export function StepsModal({
         {/* Introduction */}
         <div className="mb-6">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-            Register your IP on Story and set up license terms in just two
-            steps. Others can then use your work under your specified
-            conditions.
+            This demo walks you through registering your intellectual property
+            on Story Protocol. You'll upload your work, set license terms, and
+            see how you can earn royalties when others use your IP commercially.
+            The entire process takes just a few steps.
           </p>
         </div>
 

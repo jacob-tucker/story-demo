@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { UsageExample, DemoState } from "./types";
 import { useState, useEffect } from "react";
+import { Icon } from "./Icon";
 
 interface RevenueStreamCardProps {
   example: UsageExample;
@@ -123,8 +124,17 @@ export function RevenueStreamCard({
 
       <div className="p-3 relative">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-sm">{example.icon}</span>
+          <div className="flex items-center gap-3">
+            <div
+              className="p-2 rounded-lg"
+              style={{ backgroundColor: `${example.color}15` }}
+            >
+              <Icon
+                name={example.icon}
+                className="w-4 h-4"
+                style={{ color: example.color }}
+              />
+            </div>
             <div>
               <h4 className="font-medium text-sm">{example.title}</h4>
               <p className="text-xs text-gray-500">{example.description}</p>
@@ -139,7 +149,6 @@ export function RevenueStreamCard({
             >
               ${currentRevenue.toLocaleString()}
             </div>
-            <div className="text-xs text-gray-500">{example.volume} sales</div>
             {isAnimating && (
               <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                 +${Math.floor(currentRevenue / 20)}/min
@@ -459,6 +468,34 @@ export function RevenueStreamCard({
                   </div>
                 </div>
               </div>
+
+              {/* Platform Link */}
+              {example.platform && (
+                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                  <a
+                    href={example.platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium text-white rounded-lg transition-all duration-200 hover:scale-105 shadow-sm hover:shadow-md"
+                    style={{ backgroundColor: example.color }}
+                  >
+                    <span>Try on {example.platform.name}</span>
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

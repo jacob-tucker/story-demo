@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { DemoState } from "./types";
 import { licenseOptions } from "./LicenseOptions";
+import { Icon } from "./Icon";
 
 interface IPPreviewSectionProps {
   uploadedImage: string | null;
@@ -122,10 +123,16 @@ export function IPPreviewSection({
         {isProtected && selectedLicenseOption && (
           <div className="mt-4 p-4 rounded-lg border border-gray-200/50 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
-                <span className="text-white text-sm">
-                  {selectedLicenseOption.icon}
-                </span>
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center"
+                style={{
+                  backgroundColor: selectedLicenseOption.colors.iconColor,
+                }}
+              >
+                <Icon
+                  name={selectedLicenseOption.icon}
+                  className="w-4 h-4 text-white"
+                />
               </div>
               <div>
                 <h4 className="text-sm font-semibold">
