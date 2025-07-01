@@ -114,11 +114,8 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="bg-background overflow-hidden"
-      style={{ height: "calc(100vh - 4rem)" }}
-    >
-      <div className="max-w-7xl mx-auto flex items-start gap-4 sm:gap-8 lg:gap-12 relative h-full px-4 sm:px-8 py-4 sm:py-8 box-border">
+    <div className="bg-background md:overflow-hidden md:h-[calc(100vh-4rem)]">
+      <div className="md:max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-4 sm:gap-8 md:gap-12 relative md:h-full px-4 sm:px-8 py-4 sm:py-8 box-border">
         {/* Left Side - Journey Modal */}
         <StepsModal
           activeStep={activeStep}
@@ -137,11 +134,8 @@ export default function Home() {
         />
 
         {/* Right Side - Dynamic Preview */}
-        <div
-          className="flex-1 overflow-y-auto"
-          style={{ height: "calc(100vh - 6rem)" }}
-        >
-          <div className="max-w-[600px] mx-auto pb-8">
+        <div className="w-full flex-1 md:overflow-y-auto md:h-[calc(100vh-6rem)]">
+          <div className="md:max-w-[600px] mx-auto pb-8">
             <div className="bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
               <IPPreviewSection
                 uploadedImage={uploadedImage}

@@ -40,10 +40,7 @@ export function StepsModal({
   const step3Completed = demoState === "claimed" || demoState === "completed"; // Completed after claiming OR for non-commercial licenses
 
   return (
-    <div
-      className="sticky top-8 w-full max-w-[400px] bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-black/5 dark:border-white/5 overflow-hidden flex flex-col"
-      style={{ maxHeight: "calc(100vh - 8rem)" }}
-    >
+    <div className="md:sticky md:top-8 w-full md:max-w-[400px] bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-black/5 dark:border-white/5 overflow-hidden flex flex-col md:max-h-[calc(100vh-8rem)]">
       {/* Header */}
       <div className="px-4 py-3 border-b border-black/5 dark:border-white/5 flex-shrink-0">
         <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -52,7 +49,7 @@ export function StepsModal({
       </div>
 
       {/* Main Content */}
-      <div className="p-4 overflow-y-auto flex-1">
+      <div className="p-4 md:overflow-y-auto md:flex-1">
         {/* Introduction */}
         <div className="mb-6">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
