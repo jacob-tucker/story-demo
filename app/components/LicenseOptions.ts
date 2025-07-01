@@ -22,9 +22,9 @@ export const licenseOptions: LicenseOption[] = [
     description: "Anyone can use your work for non-commercial projects",
     icon: "fas fa-book",
     colors: {
-      border: "border-purple-500",
-      bg: "bg-purple-50 dark:bg-purple-500/10",
-      text: "text-purple-700 dark:text-purple-400",
+      border: "border-blue-500",
+      bg: "bg-blue-50 dark:bg-blue-500/10",
+      text: "text-blue-700 dark:text-blue-400",
       iconColor: "#8b5cf6",
     },
     revShare: 0,
