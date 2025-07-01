@@ -8,7 +8,6 @@ interface RoyaltyStepProps {
   demoRevenue: number;
   demoRoyalties: number;
   onClaim: () => void;
-  onReset?: () => void;
 }
 
 export function RoyaltyStep({
@@ -19,7 +18,6 @@ export function RoyaltyStep({
   demoRevenue,
   demoRoyalties,
   onClaim,
-  onReset,
 }: RoyaltyStepProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -155,7 +153,7 @@ export function RoyaltyStep({
                 You have no royalties to claim because this is a{" "}
                 {selectedLicense === "open-use" ? "Open Use" : "Non-Commercial"}{" "}
                 license. Your IP is protected and others can use it under the
-                terms you've set.
+                terms you&apos;ve set.
               </div>
             </div>
           </div>

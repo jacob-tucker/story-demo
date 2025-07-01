@@ -1,5 +1,5 @@
 import { StatsData, DemoState } from "./types";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "./Icon";
 
 interface StatsSectionProps {
@@ -20,7 +20,6 @@ export function StatsSection({
     earnings: 0,
   });
   const [isAnimating, setIsAnimating] = useState(false);
-  const hasSetFinalStats = useRef(false);
 
   // Animate stats counting up
   useEffect(() => {
@@ -75,7 +74,7 @@ export function StatsSection({
       setIsAnimating(false);
     }
     // Remove the else clause that was resetting stats to zero
-  }, [demoState, statsData]);
+  }, [demoState, statsData, animatedStats]);
 
   if (
     !(
