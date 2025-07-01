@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Icon } from "./Icon";
 
 interface UploadStepProps {
   isActive: boolean;
@@ -79,7 +80,10 @@ export function UploadStep({
             onChange={(e) => e.target.files?.[0] && onUpload(e.target.files[0])}
           />
           <div className="flex items-center justify-center gap-1.5 mb-1">
-            <span className="text-base">🎨</span>
+            <Icon
+              name="fas fa-upload"
+              className="w-4 h-4 text-gray-600 dark:text-gray-400"
+            />
             <span className="text-sm text-gray-700 dark:text-gray-300">
               Upload File
             </span>
