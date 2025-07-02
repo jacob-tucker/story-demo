@@ -26,8 +26,8 @@ export function StatsSection({
     if (demoState === "earning") {
       setIsAnimating(true);
 
-      const duration = 2000; // 2 seconds
-      const steps = 40; // 40 steps for smooth animation
+      const duration = 8000; // 8 seconds for longer magic moment
+      const steps = 80; // More steps for smoother animation
 
       const viewsStep = statsData.views / steps;
       const licensesStep = statsData.licenses / steps;

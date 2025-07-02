@@ -36,8 +36,8 @@ export function RevenueStreamCard({
       setCurrentRevenue(0);
       setCurrentRoyalty(0);
 
-      const duration = 2500; // 2.5 seconds
-      const steps = 50; // 50 steps for smooth animation
+      const duration = 6000; // 6 seconds for longer magic moment
+      const steps = 60; // More steps for smoother animation
       const revenueStep = example.revenue / steps;
       const royaltyStep = royaltyAmount / steps;
 

@@ -25,14 +25,11 @@ export function RoyaltyStep({
   const isCommercialLicense =
     selectedLicense === "commercial" || selectedLicense === "commercial-remix";
 
-  const showStats =
-    isActive && (demoState === "earning" || demoState === "claiming");
+  const showStats = isActive && demoState === "claiming";
 
-  // For non-commercial licenses, show completion state when earning starts
+  // For non-commercial licenses, show completion state when demo is completed
   const showCompletionForNonCommercial =
-    !isCommercialLicense &&
-    isActive &&
-    (demoState === "earning" || demoState === "completed");
+    !isCommercialLicense && isActive && demoState === "completed";
 
   const handleClaim = async () => {
     setIsAnimating(true);

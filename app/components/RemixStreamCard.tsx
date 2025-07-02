@@ -30,8 +30,8 @@ export function RemixStreamCard({
       // Start from 0 and count up
       setCurrentCount(0);
 
-      const duration = 2500; // 2.5 seconds
-      const steps = 50; // 50 steps for smooth animation
+      const duration = 6000; // 6 seconds for longer magic moment
+      const steps = 60; // More steps for smoother animation
       const countStep = example.count / steps;
 
       let currentStep = 0;
