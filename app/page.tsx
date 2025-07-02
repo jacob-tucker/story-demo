@@ -298,17 +298,39 @@ export default function Home() {
         // Enable auto-scroll mode
         setIsAutoScrolling(true);
 
-        // Helper function to scroll to section
+        // Prevent body scroll on mobile during animation
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+          document.body.style.overflow = "hidden";
+        }
+
+        // Helper function to scroll to section (mobile-friendly)
         const scrollToSection = (sectionClass: string, delay = 300) => {
           setTimeout(() => {
-            const rightPanel = document.querySelector(".right-panel");
             const section = document.querySelector(sectionClass) as HTMLElement;
-            if (rightPanel && section) {
-              const sectionTop = section.offsetTop - 50; // 50px offset from top
-              rightPanel.scrollTo({
-                top: sectionTop,
-                behavior: "smooth",
-              });
+            if (section) {
+              // Check if we're on mobile
+              const isMobile = window.innerWidth < 768;
+
+              if (isMobile) {
+                // On mobile, scroll the entire window to the section
+                const sectionTop =
+                  section.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({
+                  top: sectionTop,
+                  behavior: "smooth",
+                });
+              } else {
+                // On desktop, scroll within the right panel
+                const rightPanel = document.querySelector(".right-panel");
+                if (rightPanel) {
+                  const sectionTop = section.offsetTop - 50;
+                  rightPanel.scrollTo({
+                    top: sectionTop,
+                    behavior: "smooth",
+                  });
+                }
+              }
             }
           }, delay);
         };
@@ -376,6 +398,10 @@ export default function Home() {
         // Disable auto-scroll after animation completes
         setTimeout(() => {
           setIsAutoScrolling(false);
+          // Restore body scroll on mobile
+          if (isMobile) {
+            document.body.style.overflow = "";
+          }
         }, totalDuration);
 
         // For non-commercial licenses, skip to completed state after full experience
@@ -476,7 +502,7 @@ export default function Home() {
         {/* Right Side - Dynamic Preview */}
         <div
           className={`w-full flex-1 md:h-[calc(100vh-6rem)] right-panel ${
-            isAutoScrolling ? "overflow-hidden" : "md:overflow-y-auto"
+            isAutoScrolling ? "md:overflow-hidden" : "md:overflow-y-auto"
           }`}
           style={{
             scrollBehavior: isAutoScrolling ? "smooth" : "auto",
