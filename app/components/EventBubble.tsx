@@ -130,7 +130,7 @@ export function EventBubble({
 
       {/* Main bubble with enhanced effects */}
       <div
-        className="relative rounded-2xl shadow-2xl border-2 p-4 max-w-sm backdrop-blur-md bg-white dark:bg-gray-800"
+        className="relative rounded-2xl shadow-2xl border-2 p-3 sm:p-4 max-w-xs sm:max-w-sm backdrop-blur-md bg-white dark:bg-gray-800 mx-2"
         style={{
           borderColor: color,
           boxShadow: `
@@ -162,10 +162,10 @@ export function EventBubble({
           ))}
         </div>
 
-        <div className="relative flex items-center gap-4">
+        <div className="relative flex items-center gap-3 sm:gap-4">
           {/* Enhanced icon with glow */}
           <div
-            className="w-12 h-12 rounded-full flex items-center justify-center text-2xl relative"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl relative flex-shrink-0"
             style={{
               background: `linear-gradient(135deg, ${color}20, ${color}40)`,
               boxShadow: `
@@ -186,9 +186,9 @@ export function EventBubble({
           </div>
 
           {/* Message with typewriter effect */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <p
-              className="text-lg font-bold text-gray-900 dark:text-white relative"
+              className="text-sm sm:text-lg font-bold text-gray-900 dark:text-white relative leading-tight"
               style={{
                 textShadow: `0 0 10px ${color}40`,
                 animation: "typewriter 1s ease-out",
