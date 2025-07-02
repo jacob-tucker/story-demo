@@ -130,7 +130,7 @@ export function EventBubble({
 
       {/* Main bubble with enhanced effects */}
       <div
-        className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border-2 p-4 max-w-sm backdrop-blur-md"
+        className="relative rounded-2xl shadow-2xl border-2 p-4 max-w-sm backdrop-blur-md bg-white dark:bg-gray-800"
         style={{
           borderColor: color,
           boxShadow: `
@@ -139,10 +139,6 @@ export function EventBubble({
             0 0 40px ${color}30,
             0 20px 40px rgba(0,0,0,0.1)
           `,
-          background: `linear-gradient(135deg, 
-            rgba(255,255,255,0.95) 0%, 
-            rgba(255,255,255,0.85) 100%
-          )`,
           animation: !isAnimatingOut
             ? "magicalPulse 2s ease-in-out infinite, magicalFloat 3s ease-in-out infinite"
             : "none",
@@ -153,12 +149,13 @@ export function EventBubble({
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+              className="absolute w-1 h-1 rounded-full animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 2}s`,
                 animationDuration: `${1 + Math.random()}s`,
+                backgroundColor: color,
                 boxShadow: `0 0 6px ${color}`,
               }}
             />
