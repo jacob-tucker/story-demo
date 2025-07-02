@@ -214,26 +214,3 @@ export function EventBubble({
     </div>
   );
 }
-
-// Add custom animations to globals.css if not already present
-const styles = `
-@keyframes slideInRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-`;

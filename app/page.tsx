@@ -107,7 +107,7 @@ export default function Home() {
         setDemoState("earning");
 
         // Define sequential event timeline that matches what's happening on screen
-        let events: Array<{
+        const events: Array<{
           id: string;
           message: string;
           icon: string;
