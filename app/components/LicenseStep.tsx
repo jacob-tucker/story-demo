@@ -153,12 +153,48 @@ export function LicenseStep({
             )}
 
           {selectedLicense && (
-            <button
-              onClick={onProtect}
-              className="w-full py-2 px-3 rounded-lg text-xs font-medium bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg mt-1"
-            >
-              Protect My IP
-            </button>
+            <>
+              {/* Legal License Information */}
+              <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <div className="flex items-start gap-2">
+                  <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon
+                      name="fas fa-certificate"
+                      className="w-2.5 h-2.5 text-white"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-1">
+                      Legal IP Protection
+                    </h4>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mb-2">
+                      Your IP will be protected by the{" "}
+                      <strong>Programmable IP License (PIL)</strong> - a real
+                      legal license based on US copyright law.
+                    </p>
+                    <a
+                      href="/pil.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 font-medium underline"
+                    >
+                      <Icon name="fas fa-file-pdf" className="w-3 h-3" />
+                      View Legal License (PDF)
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={onProtect}
+                className="w-full py-2 px-3 rounded-lg text-xs font-medium bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg mt-1"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <Icon name="fas fa-shield-alt" className="w-3 h-3" />
+                  Protect with Legal License
+                </span>
+              </button>
+            </>
           )}
         </div>
       )}

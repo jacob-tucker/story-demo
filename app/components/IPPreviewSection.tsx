@@ -41,10 +41,16 @@ export function IPPreviewSection({
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-semibold">Your IP Asset</h3>
           {isProtected && (
-            <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
-              <div className="w-1 h-1 bg-green-500 rounded-full"></div>
-              <span className="font-medium">Protected</span>
-            </div>
+            <a
+              href="/pil.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors cursor-pointer"
+              title="View Programmable IP License (PIL)"
+            >
+              <Icon name="fas fa-certificate" className="w-2.5 h-2.5" />
+              <span className="font-medium">Legally Protected</span>
+            </a>
           )}
         </div>
 
@@ -97,7 +103,7 @@ export function IPPreviewSection({
                       <div className="flex items-center gap-3">
                         <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          Protecting your IP...
+                          Applying legal protection...
                         </span>
                       </div>
                     </div>
