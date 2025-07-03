@@ -35,7 +35,7 @@ export default function Navbar() {
               href="https://docs.story.foundation"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              className="group relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-sm hover:shadow-md"
             >
               <span className="flex items-center space-x-1 sm:space-x-2">
                 <svg
@@ -58,10 +58,9 @@ export default function Navbar() {
               href="https://portal.story.foundation"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 hover:from-blue-600 hover:via-blue-700 hover:to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 dark:hover:from-blue-500 dark:hover:via-blue-600 dark:hover:to-cyan-500 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 overflow-hidden"
+              className="group relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              <span className="relative flex items-center space-x-1 sm:space-x-1.5">
+              <span className="flex items-center space-x-1 sm:space-x-1.5">
                 <svg
                   className="w-3 h-3 sm:w-3.5 sm:h-3.5"
                   fill="none"

@@ -30,22 +30,39 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       // Second priority: Saved theme preference (non-iframe only)
       if (!isIframe) {
-        const savedTheme = localStorage.getItem("theme") as Theme;
-        if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
-          return savedTheme;
+        try {
+          const savedTheme = localStorage.getItem("theme") as Theme;
+          if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
+            return savedTheme;
+          }
+        } catch (e) {
+          // localStorage might not be available
         }
 
         // Third priority: System preference (non-iframe only)
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
+        // Force light mode as default to avoid mobile Safari dark mode detection issues
+        try {
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            return "dark";
+          }
+        } catch (e) {
+          // matchMedia might not be available
         }
       }
 
-      // Default: light
+      // Default: light (explicitly set to avoid mobile issues)
       return "light";
     };
 
-    setTheme(getInitialTheme());
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setTheme(getInitialTheme());
+    }, 10);
+
+    return () => clearTimeout(timer);
   }, [isIframe]);
 
   useEffect(() => {
