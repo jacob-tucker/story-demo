@@ -37,6 +37,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           }
         } catch (e) {
           // localStorage might not be available
+          console.log(e);
         }
 
         // Third priority: System preference (non-iframe only)
@@ -50,6 +51,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           }
         } catch (e) {
           // matchMedia might not be available
+          console.log(e);
         }
       }
 
