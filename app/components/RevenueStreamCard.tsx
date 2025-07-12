@@ -503,7 +503,7 @@ export function RevenueStreamCard({
                       <div className="flex items-center gap-2 text-xs">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                         <span className="text-gray-600 dark:text-gray-400">
-                          Smart Contracts:{" "}
+                          Commercial Use:{" "}
                           <span className="font-medium">Enabled</span>
                         </span>
                       </div>
