@@ -7,6 +7,7 @@ interface StepsModalProps {
   activeStep: number;
   selectedLicense: string | null;
   customRevShare: number;
+  allowAITraining: boolean;
   demoState: DemoState;
   demoRevenue: number;
   demoRoyalties: number;
@@ -14,6 +15,7 @@ interface StepsModalProps {
   onImageUpload: (image: string | null) => void;
   onSelectLicense: (license: string | null) => void;
   onCustomRevShareChange: (revShare: number) => void;
+  onAITrainingToggle: (enabled: boolean) => void;
   onProtect: () => void;
   onClaim: () => void;
   onReset?: () => void;
@@ -23,6 +25,7 @@ export function StepsModal({
   activeStep,
   selectedLicense,
   customRevShare,
+  allowAITraining,
   demoState,
   demoRevenue,
   demoRoyalties,
@@ -30,6 +33,7 @@ export function StepsModal({
   onImageUpload,
   onSelectLicense,
   onCustomRevShareChange,
+  onAITrainingToggle,
   onProtect,
   onClaim,
   onReset,
@@ -73,9 +77,11 @@ export function StepsModal({
             isCompleted={step2Completed}
             selectedLicense={selectedLicense}
             customRevShare={customRevShare}
+            allowAITraining={allowAITraining}
             demoState={demoState}
             onSelectLicense={onSelectLicense}
             onCustomRevShareChange={onCustomRevShareChange}
+            onAITrainingToggle={onAITrainingToggle}
             onProtect={onProtect}
             onLicenseSelect={onSelectLicense}
           />

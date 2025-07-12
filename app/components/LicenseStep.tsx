@@ -7,9 +7,11 @@ interface LicenseStepProps {
   isCompleted: boolean;
   selectedLicense: string | null;
   customRevShare: number;
+  allowAITraining: boolean;
   demoState: string;
   onSelectLicense: (licenseId: string) => void;
   onCustomRevShareChange: (revShare: number) => void;
+  onAITrainingToggle: (enabled: boolean) => void;
   onProtect: () => void;
   onLicenseSelect: (license: string) => void;
 }
@@ -19,8 +21,10 @@ export function LicenseStep({
   isCompleted,
   selectedLicense,
   customRevShare,
+  allowAITraining,
   onSelectLicense,
   onCustomRevShareChange,
+  onAITrainingToggle,
   onProtect,
 }: LicenseStepProps) {
   const [inputValue, setInputValue] = useState(customRevShare.toString());
@@ -151,6 +155,43 @@ export function LicenseStep({
                 </p>
               </div>
             )}
+
+          {selectedLicense && (
+            <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Icon
+                      name="fas fa-brain"
+                      className="w-2.5 h-2.5 text-white"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold text-purple-900 dark:text-purple-100">
+                      Allow AI to train on your IP
+                    </h4>
+                    <p className="text-xs text-purple-700 dark:text-purple-300">
+                      Enable AI models to use your IP for training
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => onAITrainingToggle(!allowAITraining)}
+                  className={`relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+                    allowAITraining
+                      ? "bg-purple-500"
+                      : "bg-gray-200 dark:bg-gray-600"
+                  }`}
+                >
+                  <span
+                    className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                      allowAITraining ? "translate-x-4" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+          )}
 
           {selectedLicense && (
             <>

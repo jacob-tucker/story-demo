@@ -14,6 +14,7 @@ export const licenseOptions: LicenseOption[] = [
       iconColor: "#6366f1",
     },
     revShare: 0,
+    allowAITraining: true,
   },
   {
     id: "non-commercial",
@@ -28,6 +29,7 @@ export const licenseOptions: LicenseOption[] = [
       iconColor: "#8b5cf6",
     },
     revShare: 0,
+    allowAITraining: true,
   },
   {
     id: "commercial",
@@ -42,6 +44,7 @@ export const licenseOptions: LicenseOption[] = [
       iconColor: "#10b981",
     },
     revShare: 5,
+    allowAITraining: true,
   },
   {
     id: "commercial-remix",
@@ -56,5 +59,6 @@ export const licenseOptions: LicenseOption[] = [
       iconColor: "#7c3aed",
     },
     revShare: 10,
+    allowAITraining: true,
   },
 ];

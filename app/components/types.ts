@@ -11,6 +11,7 @@ export interface LicenseOption {
     iconColor: string;
   };
   revShare: number;
+  allowAITraining: boolean;
 }
 
 export type DemoState =

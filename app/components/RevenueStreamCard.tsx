@@ -10,6 +10,7 @@ interface RevenueStreamCardProps {
   onClick: () => void;
   demoState?: DemoState;
   royaltyRate: number;
+  allowAITraining: boolean;
 }
 
 export function RevenueStreamCard({
@@ -19,8 +20,12 @@ export function RevenueStreamCard({
   onClick,
   demoState,
   royaltyRate,
+  allowAITraining,
 }: RevenueStreamCardProps) {
-  const royaltyAmount = Math.floor(example.revenue * royaltyRate);
+  // Calculate royalty amount - set to 0 for AI training if disabled
+  const actualRevenue =
+    example.id === "ai-training" && !allowAITraining ? 0 : example.revenue;
+  const royaltyAmount = Math.floor(actualRevenue * royaltyRate);
 
   // Animation state
   const [currentRevenue, setCurrentRevenue] = useState(0);
@@ -38,7 +43,7 @@ export function RevenueStreamCard({
 
       const duration = 6000; // 6 seconds for longer magic moment
       const steps = 60; // More steps for smoother animation
-      const revenueStep = example.revenue / steps;
+      const revenueStep = actualRevenue / steps;
       const royaltyStep = royaltyAmount / steps;
 
       let currentStep = 0;
@@ -49,7 +54,7 @@ export function RevenueStreamCard({
           setCurrentRevenue(Math.floor(revenueStep * currentStep));
           setCurrentRoyalty(Math.floor(royaltyStep * currentStep));
         } else {
-          setCurrentRevenue(example.revenue);
+          setCurrentRevenue(actualRevenue);
           setCurrentRoyalty(royaltyAmount);
           clearInterval(interval);
           setTimeout(() => setIsAnimating(false), 1000);
@@ -63,7 +68,7 @@ export function RevenueStreamCard({
       demoState === "completed"
     ) {
       // Show final amounts when claiming or after completion
-      setCurrentRevenue(example.revenue);
+      setCurrentRevenue(actualRevenue);
       setCurrentRoyalty(royaltyAmount);
       setIsAnimating(false);
     } else {
@@ -72,7 +77,7 @@ export function RevenueStreamCard({
       setCurrentRoyalty(0);
       setIsAnimating(false);
     }
-  }, [demoState, example.revenue, royaltyAmount]);
+  }, [demoState, actualRevenue, royaltyAmount]);
 
   return (
     <div
@@ -84,9 +89,23 @@ export function RevenueStreamCard({
         isAnimating
           ? "shadow-lg border-emerald-300 dark:border-emerald-700"
           : ""
+      } ${
+        example.id === "ai-training" && !allowAITraining
+          ? "opacity-60 border-red-200 dark:border-red-800"
+          : ""
       }`}
       onClick={onClick}
     >
+      {/* Disabled overlay for AI training */}
+      {example.id === "ai-training" && !allowAITraining && (
+        <div className="absolute inset-0 bg-red-50/80 dark:bg-red-900/20 pointer-events-none z-10 flex items-center justify-center">
+          <div className="bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 px-3 py-2 rounded-lg border border-red-200 dark:border-red-700 text-center">
+            <div className="text-xs font-medium mb-1">DISABLED</div>
+            <div className="text-xs opacity-90">You disallowed AI training</div>
+          </div>
+        </div>
+      )}
+
       {/* Magical sparkle effects during animation */}
       {isAnimating && (
         <div className="absolute inset-0 pointer-events-none z-10">
@@ -383,9 +402,23 @@ export function RevenueStreamCard({
                   <div className="w-32 h-32">
                     <div className="flex items-center justify-center h-full">
                       {/* Brain container with pulsing effect */}
-                      <div className="relative w-16 h-16 rounded-full border-2 border-blue-300 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700 flex items-center justify-center animate-pulse">
+                      <div
+                        className={`relative w-16 h-16 rounded-full border-2 ${
+                          allowAITraining
+                            ? "border-blue-300 bg-blue-100 dark:bg-blue-900/30 dark:border-blue-700"
+                            : "border-red-300 bg-red-100 dark:bg-red-900/30 dark:border-red-700"
+                        } flex items-center justify-center ${
+                          allowAITraining ? "animate-pulse" : ""
+                        }`}
+                      >
                         {/* Brain icon */}
-                        <i className="fas fa-brain text-blue-600 dark:text-blue-400 text-lg"></i>
+                        <i
+                          className={`fas fa-brain ${
+                            allowAITraining
+                              ? "text-blue-600 dark:text-blue-400"
+                              : "text-red-600 dark:text-red-400"
+                          } text-lg`}
+                        ></i>
 
                         {/* Your IP image inside the brain */}
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -395,17 +428,36 @@ export function RevenueStreamCard({
                               alt="Your IP"
                               width={32}
                               height={32}
-                              className="object-contain w-full h-full opacity-80"
+                              className={`object-contain w-full h-full ${
+                                allowAITraining
+                                  ? "opacity-80"
+                                  : "opacity-40 grayscale"
+                              }`}
                             />
                           </div>
                         </div>
 
-                        {/* Pulsing rings around the brain */}
-                        <div className="absolute inset-0 rounded-full border border-blue-400 opacity-30 animate-ping"></div>
-                        <div
-                          className="absolute inset-0 rounded-full border border-blue-500 opacity-20 animate-ping"
-                          style={{ animationDelay: "0.5s" }}
-                        ></div>
+                        {/* Pulsing rings around the brain - only when enabled */}
+                        {allowAITraining && (
+                          <>
+                            <div className="absolute inset-0 rounded-full border border-blue-400 opacity-30 animate-ping"></div>
+                            <div
+                              className="absolute inset-0 rounded-full border border-blue-500 opacity-20 animate-ping"
+                              style={{ animationDelay: "0.5s" }}
+                            ></div>
+                          </>
+                        )}
+
+                        {/* Disabled X overlay */}
+                        {!allowAITraining && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
+                              <span className="text-red-600 dark:text-red-400 text-xl font-bold">
+                                ×
+                              </span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -478,17 +530,29 @@ export function RevenueStreamCard({
                   {example.id === "ai-training" && (
                     <>
                       <div className="flex items-center gap-2 text-xs">
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        <div
+                          className={`w-1.5 h-1.5 ${
+                            allowAITraining ? "bg-green-500" : "bg-red-500"
+                          } rounded-full`}
+                        ></div>
                         <span className="text-gray-600 dark:text-gray-400">
                           AI Training:{" "}
-                          <span className="font-medium">Permitted</span>
+                          <span className="font-medium">
+                            {allowAITraining ? "Permitted" : "Disabled"}
+                          </span>
                         </span>
                       </div>
                       <div className="flex items-center gap-2 text-xs">
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        <div
+                          className={`w-1.5 h-1.5 ${
+                            allowAITraining ? "bg-green-500" : "bg-red-500"
+                          } rounded-full`}
+                        ></div>
                         <span className="text-gray-600 dark:text-gray-400">
                           Data Usage:{" "}
-                          <span className="font-medium">Commercial</span>
+                          <span className="font-medium">
+                            {allowAITraining ? "Commercial" : "Restricted"}
+                          </span>
                         </span>
                       </div>
                     </>

@@ -7,6 +7,7 @@ interface RevenueStreamsSectionProps {
   selectedExample: UsageExample | null;
   uploadedImage: string | null;
   royaltyRate: number;
+  allowAITraining: boolean;
   onSelectExample: (example: UsageExample | null) => void;
 }
 
@@ -16,6 +17,7 @@ export function RevenueStreamsSection({
   selectedExample,
   uploadedImage,
   royaltyRate,
+  allowAITraining,
   onSelectExample,
 }: RevenueStreamsSectionProps) {
   if (
@@ -55,6 +57,7 @@ export function RevenueStreamsSection({
               uploadedImage={uploadedImage}
               demoState={demoState}
               royaltyRate={royaltyRate}
+              allowAITraining={allowAITraining}
               onClick={() =>
                 onSelectExample(
                   selectedExample?.id === example.id ? null : example

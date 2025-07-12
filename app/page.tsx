@@ -21,6 +21,7 @@ export default function Home() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedLicense, setSelectedLicense] = useState<string | null>(null);
   const [customRevShare, setCustomRevShare] = useState<number>(15);
+  const [allowAITraining, setAllowAITraining] = useState<boolean>(true);
   const [demoState, setDemoState] = useState<DemoState>("initial");
   const [selectedExample, setSelectedExample] = useState<UsageExample | null>(
     usageExamples?.find((example) => example.id === "merchandise") || null
@@ -154,9 +155,11 @@ export default function Home() {
             },
             {
               id: "ai-training",
-              message: "AI is training on your IP!",
-              icon: "🤖",
-              color: "#3b82f6",
+              message: allowAITraining
+                ? "AI is training on your IP!"
+                : "Protecting your IP from AI",
+              icon: allowAITraining ? "🤖" : "🛡️",
+              color: allowAITraining ? "#3b82f6" : "#dc2626",
               delay: 8500, // When remix section appears (AI training relates to remix/community)
               position: "remix" as const,
             },
@@ -197,9 +200,11 @@ export default function Home() {
             },
             {
               id: "ai-training",
-              message: "AI is training on your IP!",
-              icon: "🤖",
-              color: "#3b82f6",
+              message: allowAITraining
+                ? "AI is training on your IP!"
+                : "Protecting your IP from AI",
+              icon: allowAITraining ? "🤖" : "🛡️",
+              color: allowAITraining ? "#3b82f6" : "#dc2626",
               delay: 10000,
               position: "remix" as const,
             },
@@ -426,6 +431,7 @@ export default function Home() {
     canShowStats,
     canShowRevenueStreams,
     canShowRemixStreams,
+    allowAITraining,
   ]);
 
   const handleFileUpload = (file: File) => {
@@ -452,12 +458,17 @@ export default function Home() {
     setDemoState("claimed");
   };
 
+  const handleAITrainingToggle = (enabled: boolean) => {
+    setAllowAITraining(enabled);
+  };
+
   const handleReset = () => {
     setDemoState("initial");
     setActiveStep(1);
     setUploadedImage(null);
     setSelectedLicense(null);
     setCustomRevShare(15);
+    setAllowAITraining(true);
     // Reset staged reveal states
     setShowStats(false);
     setShowRevenueStreams(false);
@@ -487,6 +498,7 @@ export default function Home() {
           activeStep={activeStep}
           selectedLicense={selectedLicense}
           customRevShare={customRevShare}
+          allowAITraining={allowAITraining}
           demoState={demoState}
           demoRevenue={totalRevenue}
           demoRoyalties={totalRoyalties}
@@ -494,6 +506,7 @@ export default function Home() {
           onImageUpload={handleExampleImageUpload}
           onSelectLicense={setSelectedLicense}
           onCustomRevShareChange={setCustomRevShare}
+          onAITrainingToggle={handleAITrainingToggle}
           onProtect={handleProtect}
           onClaim={handleClaim}
           onReset={handleReset}
@@ -535,6 +548,7 @@ export default function Home() {
                     selectedExample={selectedExample}
                     uploadedImage={uploadedImage}
                     royaltyRate={royaltyRate}
+                    allowAITraining={allowAITraining}
                     onSelectExample={setSelectedExample}
                   />
                 </div>
