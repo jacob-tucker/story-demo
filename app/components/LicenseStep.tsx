@@ -36,7 +36,7 @@ export function LicenseStep({
   const getIconBackground = (optionId: string) => {
     switch (optionId) {
       case "open-use":
-        return "bg-gradient-to-br from-indigo-400 to-indigo-600";
+        return "bg-gradient-to-br from-orange-400 to-orange-600";
       case "non-commercial":
         return "bg-gradient-to-br from-blue-400 to-blue-600";
       case "commercial":
